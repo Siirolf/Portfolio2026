@@ -3,9 +3,13 @@
 import { motion } from "framer-motion";
 import {Linkedin, Mail, ArrowUpRight, Download, MapPin, Clock } from "lucide-react";
 import { useState, useEffect } from "react";
+import { translations, Language } from "./translations";
 
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
+  const [language, setLanguage] = useState<Language>('fr');
+
+  const t = translations[language];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,152 +19,49 @@ export default function Home() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const professionalExperiences = [
-    {
-      year: "Août 2025 - Aujourd'hui",
-      title: "Développeur/Testeur COBOL",
-      company: "IBM CIC - Lille",
-      type: "Apprentissage",
-      description: "Développement d'applications bancaires COBOL : ajout de fonctionnalités, conception d'applications complètes et analyse de programmes. Collaboration inter-équipes (développeurs COBOL/C#/DevBooster, analystes, chefs de projet). Tests et assurance qualité selon les normes clients. Formation au développement sur DevBooster (framework .NET propriétaire) depuis janvier 2026.",
-      tags: ["COBOL", "JCL", "RdZ", "TSO/ISPF", "DevBooster", ".NET", "Tests"]
-    },
-    {
-      year: "Juillet - Août 2024",
-      title: "Manutentionnaire",
-      company: "Brasserie Goudale - Arques",
-      type: "Emploi saisonnier",
-      description: "Gestion de la manutention et logistique au sein d'une brasserie",
-      tags: ["Logistique", "Manutention", "Travail d'équipe"]
-    },
-    {
-      year: "Juillet - Août 2023",
-      title: "Employé polyvalent",
-      company: "Carrefour - Éperlecques",
-      type: "Emploi saisonnier",
-      description: "Mise en rayon, Service aux stands boucherie/poissonnerie/charcuterie, conseil client et gestion des stocks",
-      tags: ["Commerce", "Service client", "Organisation"]
-    },
-    {
-      year: "Juin 2023",
-      title: "Administrateur réseau et systèmes",
-      company: "LYPSO - Saint-Omer",
-      type: "Stage",
-      description: "Stage d'1 mois - Masterisation de postes informatiques, gestion de GPO, création de paquets logiciel via WAPT, interventions de maintenance, dépannage serveur, mise à jour de l'intranet et création d'une interface web pour station météo",
-      tags: ["Python", "SQL", "PHP", "HTML/CSS", "WAPT", "GPO"]
-    },
-    {
-      year: "Juillet - Août 2022",
-      title: "Employé polyvalent",
-      company: "Auchan - Longuenesse",
-      type: "Emploi saisonnier",
-      description: "Rayon boucherie, mise en rayon et respect de normes d'hygiène",
-      tags: ["Commerce", "Service client", "Polyvalence"]
-    }
-  ];
+  const professionalExperiences = t.experiences.prof;
+  const personalExperiences = t.experiences.personal;
+  const projects = t.projects.list.map((project, index) => ({
+    ...project,
+    image: [
+      "bg-gradient-to-br from-purple-50 to-indigo-100 dark:from-purple-950 dark:to-indigo-950",
+      "bg-gradient-to-br from-rose-50 to-pink-100 dark:from-rose-950 dark:to-pink-950",
+      "bg-gradient-to-br from-amber-50 to-yellow-100 dark:from-amber-950 dark:to-yellow-950",
+      "bg-gradient-to-br from-violet-50 to-fuchsia-100 dark:from-violet-950 dark:to-fuchsia-950",
+      "bg-gradient-to-br from-yellow-50 to-orange-100 dark:from-yellow-950 dark:to-orange-950",
+      "bg-gradient-to-br from-blue-50 to-cyan-100 dark:from-blue-950 dark:to-cyan-950",
+      "bg-gradient-to-br from-indigo-50 to-purple-100 dark:from-indigo-950 dark:to-purple-950",
+      "bg-gradient-to-br from-emerald-50 to-teal-100 dark:from-emerald-950 dark:to-teal-950",
+      "bg-gradient-to-br from-green-50 to-lime-100 dark:from-green-950 dark:to-lime-950",
+      "bg-gradient-to-br from-slate-50 to-gray-100 dark:from-slate-950 dark:to-gray-950",
+      "bg-gradient-to-br from-sky-50 to-blue-100 dark:from-sky-950 dark:to-blue-950"
+    ][index],
+    imageUrl: [
+      "/bioechecvr.png",
+      "/todo.jpg",
+      "/eggfortress.jpg",
+      "/unreal.jpg",
+      "/tourdefrance.jpg",
+      "/flutter.jpg",
+      "/astrophoto.jpg",
+      "/morpion.jpg",
+      "/supermarche.jpg",
+      "/nginx.png",
+      "/littotour.png"
+    ][index]
+  }));
 
   const getExperienceTypeColor = (type: string) => {
-    const colors: { [key: string]: string } = {
+    const typeMap: { [key: string]: string } = {
       "Apprentissage": "bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300 border-purple-300 dark:border-purple-700",
+      "Work-study": "bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300 border-purple-300 dark:border-purple-700",
       "Stage": "bg-orange-100 dark:bg-orange-900/40 text-orange-700 dark:text-orange-300 border-orange-300 dark:border-orange-700",
-      "Emploi saisonnier": "bg-teal-100 dark:bg-teal-900/40 text-teal-700 dark:text-teal-300 border-teal-300 dark:border-teal-700"
+      "Internship": "bg-orange-100 dark:bg-orange-900/40 text-orange-700 dark:text-orange-300 border-orange-300 dark:border-orange-700",
+      "Emploi saisonnier": "bg-teal-100 dark:bg-teal-900/40 text-teal-700 dark:text-teal-300 border-teal-300 dark:border-teal-700",
+      "Seasonal job": "bg-teal-100 dark:bg-teal-900/40 text-teal-700 dark:text-teal-300 border-teal-300 dark:border-teal-700"
     };
-    return colors[type] || "bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400";
+    return typeMap[type] || "bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400";
   };
-
-  const personalExperiences = [
-    {
-      year: "2023-2026",
-      title: "BUT Informatique",
-      company: "Institut Universitaire de Technologie - Calais",
-      description: "Formation universitaire en 3 ans axée sur le développement d'applications et l'administration de systèmes. Acquisition de compétences solides en programmation (Java, Python, C,...), développement web full-stack (React, Node.js, PHP), gestion de bases de données relationnelles (PostgreSQL, SQL) et NoSQL (MongoDB), administration systèmes et réseaux (Linux, Docker, CI/CD), intelligence artificielle et machine learning, et gestion de projet avec méthodologies Agile. Réalisation de nombreux projets SAE (Situations d'Apprentissage et d'Évaluation) seul et en équipe.",
-      tags: ["Java", "Python", "C", "PostgreSQL", "Docker", "Linux", "Agile", "Réseaux", "IA"]
-    },
-    {
-      year: "2022-2023",
-      title: "BTS SIO option SLAM",
-      company: "Lycée Jean Bart - Dunkerque",
-      description: "1ère année de BTS Services Informatiques aux Organisations spécialité Solutions Logicielles et Applications Métiers",
-      tags: ["Développement", "Sécurité"],
-      certifications: [
-        { name: "Certification PIX", level: "Compétences numériques" },
-        { name: "Certification ANSSI", level: "Cybersécurité" }
-      ]
-    },
-    {
-      year: "2020-2023",
-      title: "Baccalauréat Général",
-      company: "Lycée Blaise Pascal - Longuenesse",
-      description: "Spécialités Mathématiques, Physique-Chimie et NSI (Numérique et Sciences Informatiques) - Mention Assez Bien",
-      tags: ["Sciences", "Informatique", "Mathématiques"]
-    }
-  ];
-
-  const projects = [
-    {
-      title: "Site agence de location saisonnière",
-      period: "Décembre 2025 - En cours",
-      description: "Plateforme web complète pour agence de location avec système de réservation en ligne et gestion des disponibilités",
-      image: "bg-gradient-to-br from-rose-50 to-pink-100 dark:from-rose-950 dark:to-pink-950",
-      imageUrl: "/todo.jpg",
-      tags: ["React", "Next.js", "Nest.js", "SQLite"]
-    },
-    {
-      title: "Jeu vidéo en Python",
-      period: "Octobre 2025 - Janvier 2026",
-      description: "Développement d'un jeu vidéo complet en Python avec gestion des collisions, animations et système de score",
-      image: "bg-gradient-to-br from-amber-50 to-yellow-100 dark:from-amber-950 dark:to-yellow-950",
-      imageUrl: "/todo.jpg",
-      tags: ["Python", "Pygame", "Git"]
-    },
-    {
-      title: "Développement jeux vidéo",
-      period: "En cours",
-      description: "Apprentissage du développement de jeux sur Unreal Engine et modélisation 3D avec Blender",
-      image: "bg-gradient-to-br from-violet-50 to-fuchsia-100 dark:from-violet-950 dark:to-fuchsia-950",
-      imageUrl: "/unreal.jpg",
-      tags: ["Unreal Engine", "C++", "Blender"]
-    },
-    {
-      title: "Site de prédiction Tour de France",
-      period: "Avril 2025",
-      description: "Site web dynamique avec API de prédiction basé sur l'analyse de données historiques avec routines PL/pgSQL",
-      image: "bg-gradient-to-br from-yellow-50 to-orange-100 dark:from-yellow-950 dark:to-orange-950",
-      imageUrl: "/tourdefrance.jpg",
-      tags: ["SQL", "PHP", "Node.js", "PL/pgSQL"]
-    },
-    {
-      title: "Application Mobile Flutter",
-      period: "Février - Mars 2025",
-      description: "Application de suivi des performances sportives avec base de données locale et gestion d'état RiverPod",
-      image: "bg-gradient-to-br from-blue-50 to-cyan-100 dark:from-blue-950 dark:to-cyan-950",
-      imageUrl: "/flutter.jpg",
-      tags: ["Flutter", "Dart", "Git", "Dio"]
-    },
-    {
-      title: "Logiciel de traitement d'images astrophoto",
-      period: "Janvier 2025",
-      description: "Outil Python pour récupérer et traiter des images d'astrophotographie depuis MAST avec superposition",
-      image: "bg-gradient-to-br from-indigo-50 to-purple-100 dark:from-indigo-950 dark:to-purple-950",
-      imageUrl: "/astrophoto.jpg",
-      tags: ["Python", "MAST", "PyQt6"]
-    },
-    {
-      title: "Jeu Morpion en réseau",
-      period: "Janvier 2025",
-      description: "Jeu multijoueur en ligne développé en C avec utilisation de sockets réseaux et modélisation de processus",
-      image: "bg-gradient-to-br from-emerald-50 to-teal-100 dark:from-emerald-950 dark:to-teal-950",
-      imageUrl: "/morpion.jpg",
-      tags: ["C", "Socket", "Réseaux"]
-    },
-    {
-      title: "Optimisation supermarché",
-      period: "Mai 2024",
-      description: "Logiciel d'optimisation de placement des produits avec calcul du chemin le plus court pour une liste de courses",
-      image: "bg-gradient-to-br from-green-50 to-lime-100 dark:from-green-950 dark:to-lime-950",
-      imageUrl: "/supermarche.jpg",
-      tags: ["Python", "PyQt6", "Graphs"]
-    }
-  ];
 
   const getTagColor = (tag: string) => {
     const colors: { [key: string]: string } = {
@@ -180,49 +81,73 @@ export default function Home() {
       "Pygame": "bg-lime-100 dark:bg-lime-900/30 text-lime-700 dark:text-lime-300",
       "PyQt6": "bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300",
       "Unreal Engine": "bg-fuchsia-100 dark:bg-fuchsia-900/30 text-fuchsia-700 dark:text-fuchsia-300",
+      "Unity": "bg-pink-100 dark:bg-pink-900/30 text-pink-700 dark:text-pink-300",
+      "VR": "bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300",
+      "C#": "bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300",
       "Blender": "bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300",
       "Git": "bg-rose-100 dark:bg-rose-900/30 text-rose-700 dark:text-rose-300",
+      "Linux": "bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300",
+      "Nginx": "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300",
+      "VirtualBox": "bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300",
+      "HTML": "bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300",
+      "CSS": "bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300",
     };
     return colors[tag] || "bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400";
   };
 
   const skills = {
-    languages: [
-      { name: "Python", level: 90, icon: "🐍" },
-      { name: "Java", level: 85, icon: "☕" },
-      { name: "C/C++", level: 75, icon: "⚙️" },
-      { name: "JavaScript", level: 80, icon: "🟨" },
-      { name: "TypeScript", level: 75, icon: "🔷" },
-      { name: "PHP", level: 70, icon: "🐘" },
-      { name: "COBOL", level: 70, icon: "💼" },
-      { name: "SQL", level: 85, icon: "🗃️" }
+    frontend: [
+      { name: "React", icon: "⚛️", color: "from-blue-500 to-cyan-500" },
+      { name: "Next.js", icon: "▲", color: "from-gray-700 to-gray-900" },
+      { name: "Vue.js", icon: "💚", color: "from-emerald-500 to-green-500" },
+      { name: "TypeScript", icon: "🔷", color: "from-blue-600 to-blue-700" },
+      { name: "JavaScript", icon: "🟨", color: "from-yellow-400 to-yellow-500" },
+      { name: "HTML/CSS", icon: "🎨", color: "from-orange-500 to-red-500" },
+      { name: "Tailwind CSS", icon: "💨", color: "from-cyan-400 to-blue-500" }
     ],
-    frameworks: [
-      { name: "React", level: 80 },
-      { name: "Next.js", level: 75 },
-      { name: "Node.js", level: 80 },
-      { name: "Nest.js", level: 70 },
-      { name: "Flutter", level: 70 },
-      { name: "Symfony", level: 65 },
-      { name: "Vue.js", level: 65 }
+    backend: [
+      { name: "Node.js", icon: "🟢", color: "from-green-600 to-green-700" },
+      { name: "Nest.js", icon: "🔴", color: "from-red-600 to-pink-600" },
+      { name: "Python", icon: "🐍", color: "from-blue-500 to-yellow-500" },
+      { name: "Java", icon: "☕", color: "from-orange-600 to-red-700" },
+      { name: "PHP", icon: "🐘", color: "from-purple-600 to-indigo-600" },
+      { name: "C/C++", icon: "⚙️", color: "from-blue-700 to-indigo-800" },
+      { name: "COBOL", icon: "💼", color: "from-gray-600 to-gray-700" },
+      { name: "C#", icon: "#️⃣", color: "from-purple-700 to-violet-700" },
+      { name: ".NET", icon: "🔷", color: "from-blue-600 to-purple-600" },
+      { name: "F#", icon: "🟦", color: "from-indigo-600 to-blue-700" }
     ],
-    tools: [
-      { name: "Git", level: 85 },
-      { name: "Docker", level: 75 },
-      { name: "Linux", level: 80 },
-      { name: "PostgreSQL", level: 80 },
-      { name: "MongoDB", level: 70 },
-      { name: "Figma", level: 65 },
-      { name: "RdZ", level: 75 },
-      { name: "DevBooster", level: 60 }
+    database: [
+      { name: "PostgreSQL", icon: "🐘", color: "from-blue-600 to-blue-700" },
+      { name: "MongoDB", icon: "🍃", color: "from-green-600 to-emerald-600" },
+      { name: "SQL", icon: "🗃️", color: "from-orange-500 to-orange-600" },
+      { name: "SQLite", icon: "💾", color: "from-sky-500 to-blue-600" },
+      { name: "NoSQL", icon: "📂", color: "from-emerald-500 to-teal-600" }
+    ],
+    devops: [
+      { name: "Git", icon: "🔀", color: "from-orange-600 to-red-600" },
+      { name: "Docker", icon: "🐋", color: "from-blue-500 to-cyan-600" },
+      { name: "Linux", icon: "🐧", color: "from-yellow-500 to-orange-500" },
+      { name: "CI/CD", icon: "🚀", color: "from-indigo-500 to-purple-600" },
+      { name: "Nginx", icon: "🟢", color: "from-green-500 to-emerald-600" },
+      { name: "Kubernetes", icon: "☸️", color: "from-blue-600 to-indigo-700" }
+    ],
+    mobile: [
+      { name: "Flutter", icon: "📱", color: "from-blue-400 to-cyan-500" },
+      { name: "Dart", icon: "🎯", color: "from-teal-500 to-cyan-600" }
+    ],
+    gamedev: [
+      { name: "Unity", icon: "🎮", color: "from-gray-700 to-gray-900" },
+      { name: "Unreal Engine", icon: "🎮", color: "from-purple-600 to-fuchsia-600" },
+      { name: "Blender", icon: "🎨", color: "from-orange-500 to-blue-600" }
     ],
     other: [
-      { name: "Intelligence Artificielle", icon: "🤖" },
-      { name: "Machine Learning", icon: "🧠" },
-      { name: "Réseaux & Systèmes", icon: "🌐" },
-      { name: "Méthodologies Agile", icon: "🔄" },
-      { name: "CI/CD", icon: "🚀" },
-      { name: "Cybersécurité", icon: "🔒" }
+      { name: "IA & ML", icon: "🤖", color: "from-pink-500 to-rose-600" },
+      { name: "Agile", icon: "🔄", color: "from-green-500 to-teal-600" },
+      { name: "Cybersécurité", icon: "🔒", color: "from-red-600 to-pink-600" },
+      { name: "Figma", icon: "🎨", color: "from-purple-500 to-pink-500" },
+      { name: "RdZ", icon: "💻", color: "from-blue-600 to-indigo-700" },
+      { name: "DevBooster", icon: "⚡", color: "from-yellow-500 to-orange-600" }
     ]
   };
 
@@ -240,34 +165,85 @@ export default function Home() {
         }`}
       >
         <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-          <motion.a 
-            href="#"
-            className="text-xl font-semibold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent"
-            whileHover={{ scale: 1.02 }}
-          >
-            Luc Telliez<span className="text-blue-400">.</span>
-          </motion.a>
+          <div className="flex items-center gap-4">
+            {/* Language Selector */}
+            <div className="flex gap-2 p-1 bg-gray-800/50 rounded-full backdrop-blur-sm border border-gray-700/50">
+              <button
+                onClick={() => setLanguage('fr')}
+                className={`relative w-9 h-9 rounded-full overflow-hidden transition-all duration-300 ${
+                  language === 'fr' 
+                    ? 'ring-2 ring-blue-400 shadow-lg shadow-blue-500/50 scale-110' 
+                    : 'opacity-70 hover:opacity-100 hover:scale-105'
+                }`}
+                title="Français"
+              >
+                <div className="w-full h-full flex">
+                  <div className="w-1/3 bg-blue-600"></div>
+                  <div className="w-1/3 bg-white"></div>
+                  <div className="w-1/3 bg-red-600"></div>
+                </div>
+              </button>
+              <button
+                onClick={() => setLanguage('en')}
+                className={`relative w-9 h-9 rounded-full overflow-hidden transition-all duration-300 ${
+                  language === 'en' 
+                    ? 'ring-2 ring-blue-400 shadow-lg shadow-blue-500/50 scale-110' 
+                    : 'opacity-70 hover:opacity-100 hover:scale-105'
+                }`}
+                title="English"
+              >
+                <div className="w-full h-full bg-blue-800 relative">
+                  {/* White cross background */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="absolute w-full h-2 bg-white"></div>
+                    <div className="absolute h-full w-2 bg-white"></div>
+                  </div>
+                  {/* Red cross */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="absolute w-full h-1 bg-red-600"></div>
+                    <div className="absolute h-full w-1 bg-red-600"></div>
+                  </div>
+                  {/* Diagonal white lines */}
+                  <div className="absolute inset-0">
+                    <svg viewBox="0 0 60 30" className="w-full h-full">
+                      <path d="M0,0 L60,30 M60,0 L0,30" stroke="white" strokeWidth="6" fill="none"/>
+                      <path d="M0,0 L60,30 M60,0 L0,30" stroke="#C8102E" strokeWidth="3" fill="none"/>
+                    </svg>
+                  </div>
+                </div>
+              </button>
+            </div>
+            
+            <motion.a 
+              href="#"
+              className="text-xl font-semibold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent"
+              whileHover={{ scale: 1.02 }}
+            >
+              Luc Telliez<span className="text-blue-400">.</span>
+            </motion.a>
+          </div>
           
-          <div className="flex items-center gap-8">
+          <div className="flex items-center gap-4">
+
             <div className="hidden md:flex gap-6">
               <a href="#formation" className="text-gray-300 hover:text-white transition-colors text-sm font-medium relative group">
-                Formation
+                {t.nav.formation}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 group-hover:w-full transition-all duration-300"></span>
               </a>
               <a href="#experiences-pro" className="text-gray-300 hover:text-white transition-colors text-sm font-medium relative group">
-                Expériences
+                {t.nav.experiences}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 group-hover:w-full transition-all duration-300"></span>
               </a>
               <a href="#projets" className="text-gray-300 hover:text-white transition-colors text-sm font-medium relative group">
-                Projets
+                {t.nav.projects}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 group-hover:w-full transition-all duration-300"></span>
               </a>
               <a href="#compétences" className="text-gray-300 hover:text-white transition-colors text-sm font-medium relative group">
-                Compétences
+                {t.nav.skills}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 group-hover:w-full transition-all duration-300"></span>
               </a>
               <a href="#contact" className="text-gray-300 hover:text-white transition-colors text-sm font-medium relative group">
-                Contact
+                {t.nav.contact}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 group-hover:w-full transition-all duration-300"></span>
               </a>
             </div>
@@ -278,7 +254,7 @@ export default function Home() {
               className="px-4 py-2 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white rounded-lg text-sm font-medium transition-all flex items-center gap-2 shadow-lg shadow-blue-500/30"
             >
               <Download className="w-4 h-4" />
-              CV
+              {t.nav.cv}
             </motion.button>
           </div>
         </div>
@@ -295,20 +271,17 @@ export default function Home() {
             >
               <div className="inline-flex items-center gap-2 px-3 py-1 bg-gradient-to-r from-blue-600/10 to-cyan-600/10 border border-blue-500/20 text-blue-600 dark:text-cyan-400 rounded-full text-sm font-medium mb-6">
                 <div className="w-2 h-2 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full animate-pulse shadow-lg shadow-blue-500/50"></div>
-                Disponible pour une alternance
+                {t.hero.available}
               </div>
               
               <h1 className="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-                Développeur
+                {t.hero.title}
                 <br />
-                <span className="bg-gradient-to-r from-blue-600 via-cyan-600 to-blue-700 dark:from-blue-400 dark:via-cyan-400 dark:to-blue-500 bg-clip-text text-transparent">Full-Stack</span>
+                <span className="bg-gradient-to-r from-blue-600 via-cyan-600 to-blue-700 dark:from-blue-400 dark:via-cyan-400 dark:to-blue-500 bg-clip-text text-transparent">{t.hero.subtitle}</span>
               </h1>
               
               <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
-                Étudiant en 3ème année de BUT Informatique et apprenti développeur COBOL, 
-                actuellement candidat dans des écoles d'ingénieurs. Curieux et passionné, 
-                j'aime explorer différents langages, technologies et domaines de la programmation : 
-                du web moderne aux systèmes mainframe, en passant par le développement mobile et les jeux vidéo.
+                {t.hero.description}
               </p>
               
               <div className="flex flex-wrap gap-4 mb-8">
@@ -318,7 +291,7 @@ export default function Home() {
                   whileTap={{ scale: 0.95 }}
                   className="px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white rounded-lg font-medium transition-all flex items-center gap-2 shadow-lg shadow-blue-500/30"
                 >
-                  Me contacter
+                  {t.hero.cta}
                   <ArrowUpRight className="w-4 h-4" />
                 </motion.a>
                 <motion.a
@@ -327,7 +300,7 @@ export default function Home() {
                   whileTap={{ scale: 0.95 }}
                   className="px-6 py-3 border border-gray-300 dark:border-gray-700 hover:border-blue-500 dark:hover:border-cyan-500 rounded-lg font-medium transition-all hover:bg-gray-50 dark:hover:bg-gray-800/50"
                 >
-                  Voir mes projets
+                  {t.hero.projects}
                 </motion.a>
               </div>
 
@@ -351,7 +324,7 @@ export default function Home() {
             >
               <div className="relative aspect-square bg-gradient-to-br from-slate-800 via-gray-900 to-slate-900 rounded-2xl overflow-hidden border border-gray-700 shadow-2xl">
                 <img 
-                  src="/todo.jpg" 
+                  src="/profile.jpeg" 
                   alt="Luc Telliez"
                   className="absolute inset-0 w-full h-full object-cover"
                 />
@@ -386,7 +359,7 @@ export default function Home() {
                 </svg>
               </div>
               <h3 className="text-3xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 dark:from-emerald-400 dark:to-teal-400 bg-clip-text text-transparent">
-                Formation
+                {t.journey.formation}
               </h3>
             </div>
             <div className="space-y-4">
@@ -426,7 +399,7 @@ export default function Home() {
                           <svg className="w-5 h-5 text-yellow-600 dark:text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
                           </svg>
-                          <h5 className="font-bold text-yellow-900 dark:text-yellow-200">Certifications obtenues</h5>
+                          <h5 className="font-bold text-yellow-900 dark:text-yellow-200">{t.experiences.certifications}</h5>
                         </div>
                         <div className="grid gap-2">
                           {exp.certifications.map((cert, idx) => (
@@ -471,7 +444,7 @@ export default function Home() {
                 </svg>
               </div>
               <h3 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 dark:from-blue-400 dark:to-cyan-400 bg-clip-text text-transparent">
-                Expériences Professionnelles
+                {t.journey.professionalExp}
               </h3>
             </div>
             <div className="space-y-4">
@@ -536,9 +509,9 @@ export default function Home() {
             viewport={{ once: true }}
             className="mb-12"
           >
-            <h2 className="text-4xl font-bold mb-4">Projets récents</h2>
+            <h2 className="text-4xl font-bold mb-4">{t.projects.title}</h2>
             <p className="text-gray-600 dark:text-gray-400">
-              Quelques réalisations qui illustrent mes compétences
+              {t.projects.subtitle}
             </p>
           </motion.div>
 
@@ -558,7 +531,7 @@ export default function Home() {
                     <img 
                       src={project.imageUrl} 
                       alt={project.title}
-                      className="w-full h-full object-contain p-4"
+                      className={project.imageUrl.includes('eggfortress') ? "w-full h-full object-contain p-6" : "w-full h-full object-cover"}
                     />
                   ) : (
                     <div className="text-6xl opacity-50">💻</div>
@@ -604,140 +577,223 @@ export default function Home() {
             viewport={{ once: true }}
             className="mb-12 text-center"
           >
-            <h2 className="text-4xl font-bold mb-4">Compétences Techniques</h2>
+            <h2 className="text-4xl font-bold mb-4">{t.skills.title}</h2>
             <p className="text-gray-600 dark:text-gray-400">
-              Un aperçu de mes compétences et mon niveau de maîtrise
+              {t.skills.subtitle}
             </p>
           </motion.div>
 
-          {/* Langages de programmation */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mb-12"
-          >
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-600 to-cyan-600 flex items-center justify-center text-2xl">
-                💻
+          <div className="space-y-10">
+            {/* Frontend */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-600 to-cyan-600 flex items-center justify-center text-xl">
+                  🎨
+                </div>
+                <h3 className="text-2xl font-bold">{t.skills.frontend}</h3>
               </div>
-              <h3 className="text-2xl font-bold">Langages de programmation</h3>
-            </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-              {skills.languages.map((skill, index) => (
-                <motion.div
-                  key={skill.name}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.05 }}
-                  whileHover={{ scale: 1.05 }}
-                  className="bg-gradient-to-br from-white to-blue-50/30 dark:from-gray-900 dark:to-blue-950/20 rounded-xl p-5 border-2 border-gray-200 dark:border-gray-800 hover:border-blue-500 dark:hover:border-cyan-500 transition-all cursor-default"
-                >
-                  <div className="flex flex-col items-center gap-2 text-center">
-                    <span className="text-4xl">{skill.icon}</span>
-                    <span className="font-semibold text-gray-900 dark:text-white">{skill.name}</span>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+              <div className="flex flex-wrap gap-3">
+                {skills.frontend.map((skill, index) => (
+                  <motion.div
+                    key={skill.name}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.03 }}
+                    whileHover={{ scale: 1.1, y: -2 }}
+                    className={`px-4 py-2 rounded-full bg-gradient-to-r ${skill.color} text-white font-medium shadow-lg hover:shadow-xl transition-all cursor-default flex items-center gap-2`}
+                  >
+                    <span>{skill.icon}</span>
+                    <span>{skill.name}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
 
-          {/* Frameworks & Bibliothèques */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mb-12"
-          >
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center text-2xl">
-                📦
+            {/* Backend */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-green-600 to-emerald-600 flex items-center justify-center text-xl">
+                  ⚙️
+                </div>
+                <h3 className="text-2xl font-bold">{t.skills.backend}</h3>
               </div>
-              <h3 className="text-2xl font-bold">Frameworks & Bibliothèques</h3>
-            </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-              {skills.frameworks.map((skill, index) => (
-                <motion.div
-                  key={skill.name}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.05 }}
-                  whileHover={{ scale: 1.05 }}
-                  className="bg-gradient-to-br from-white to-purple-50/30 dark:from-gray-900 dark:to-purple-950/20 rounded-xl p-5 border-2 border-gray-200 dark:border-gray-800 hover:border-purple-500 dark:hover:border-pink-500 transition-all cursor-default"
-                >
-                  <div className="flex items-center justify-center text-center">
-                    <span className="font-semibold text-gray-900 dark:text-white text-lg">{skill.name}</span>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+              <div className="flex flex-wrap gap-3">
+                {skills.backend.map((skill, index) => (
+                  <motion.div
+                    key={skill.name}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.03 }}
+                    whileHover={{ scale: 1.1, y: -2 }}
+                    className={`px-4 py-2 rounded-full bg-gradient-to-r ${skill.color} text-white font-medium shadow-lg hover:shadow-xl transition-all cursor-default flex items-center gap-2`}
+                  >
+                    <span>{skill.icon}</span>
+                    <span>{skill.name}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
 
-          {/* Outils & Technologies */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mb-12"
-          >
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-emerald-600 to-teal-600 flex items-center justify-center text-2xl">
-                🛠️
+            {/* Database */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-orange-600 to-red-600 flex items-center justify-center text-xl">
+                  🗄️
+                </div>
+                <h3 className="text-2xl font-bold">{t.skills.database}</h3>
               </div>
-              <h3 className="text-2xl font-bold">Outils & Technologies</h3>
-            </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-              {skills.tools.map((skill, index) => (
-                <motion.div
-                  key={skill.name}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.05 }}
-                  whileHover={{ scale: 1.05 }}
-                  className="bg-gradient-to-br from-white to-emerald-50/30 dark:from-gray-900 dark:to-emerald-950/20 rounded-xl p-5 border-2 border-gray-200 dark:border-gray-800 hover:border-emerald-500 dark:hover:border-teal-500 transition-all cursor-default"
-                >
-                  <div className="flex items-center justify-center text-center">
-                    <span className="font-semibold text-gray-900 dark:text-white text-lg">{skill.name}</span>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+              <div className="flex flex-wrap gap-3">
+                {skills.database.map((skill, index) => (
+                  <motion.div
+                    key={skill.name}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.03 }}
+                    whileHover={{ scale: 1.1, y: -2 }}
+                    className={`px-4 py-2 rounded-full bg-gradient-to-r ${skill.color} text-white font-medium shadow-lg hover:shadow-xl transition-all cursor-default flex items-center gap-2`}
+                  >
+                    <span>{skill.icon}</span>
+                    <span>{skill.name}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
 
-          {/* Autres compétences */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-orange-600 to-red-600 flex items-center justify-center text-2xl">
-                ⭐
+            {/* DevOps */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-600 to-indigo-600 flex items-center justify-center text-xl">
+                  🚀
+                </div>
+                <h3 className="text-2xl font-bold">{t.skills.devops}</h3>
               </div>
-              <h3 className="text-2xl font-bold">Domaines d'expertise</h3>
-            </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {skills.other.map((skill, index) => (
-                <motion.div
-                  key={skill.name}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.05 }}
-                  whileHover={{ scale: 1.05 }}
-                  className="bg-gradient-to-br from-white to-orange-50/30 dark:from-gray-900 dark:to-orange-950/20 rounded-xl p-5 border-2 border-gray-200 dark:border-gray-800 hover:border-orange-500 dark:hover:border-red-500 transition-all cursor-default"
-                >
-                  <div className="flex items-center gap-3">
-                    <span className="text-3xl">{skill.icon}</span>
-                    <span className="font-semibold text-gray-900 dark:text-white">{skill.name}</span>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+              <div className="flex flex-wrap gap-3">
+                {skills.devops.map((skill, index) => (
+                  <motion.div
+                    key={skill.name}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.03 }}
+                    whileHover={{ scale: 1.1, y: -2 }}
+                    className={`px-4 py-2 rounded-full bg-gradient-to-r ${skill.color} text-white font-medium shadow-lg hover:shadow-xl transition-all cursor-default flex items-center gap-2`}
+                  >
+                    <span>{skill.icon}</span>
+                    <span>{skill.name}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Mobile */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-600 to-blue-600 flex items-center justify-center text-xl">
+                  📱
+                </div>
+                <h3 className="text-2xl font-bold">{t.skills.mobile}</h3>
+              </div>
+              <div className="flex flex-wrap gap-3">
+                {skills.mobile.map((skill, index) => (
+                  <motion.div
+                    key={skill.name}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.03 }}
+                    whileHover={{ scale: 1.1, y: -2 }}
+                    className={`px-4 py-2 rounded-full bg-gradient-to-r ${skill.color} text-white font-medium shadow-lg hover:shadow-xl transition-all cursor-default flex items-center gap-2`}
+                  >
+                    <span>{skill.icon}</span>
+                    <span>{skill.name}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Game Development */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-fuchsia-600 to-purple-600 flex items-center justify-center text-xl">
+                  🎮
+                </div>
+                <h3 className="text-2xl font-bold">{t.skills.gamedev}</h3>
+              </div>
+              <div className="flex flex-wrap gap-3">
+                {skills.gamedev.map((skill, index) => (
+                  <motion.div
+                    key={skill.name}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.03 }}
+                    whileHover={{ scale: 1.1, y: -2 }}
+                    className={`px-4 py-2 rounded-full bg-gradient-to-r ${skill.color} text-white font-medium shadow-lg hover:shadow-xl transition-all cursor-default flex items-center gap-2`}
+                  >
+                    <span>{skill.icon}</span>
+                    <span>{skill.name}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Other */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-pink-600 to-rose-600 flex items-center justify-center text-xl">
+                  ⭐
+                </div>
+                <h3 className="text-2xl font-bold">{t.skills.other}</h3>
+              </div>
+              <div className="flex flex-wrap gap-3">
+                {skills.other.map((skill, index) => (
+                  <motion.div
+                    key={skill.name}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.03 }}
+                    whileHover={{ scale: 1.1, y: -2 }}
+                    className={`px-4 py-2 rounded-full bg-gradient-to-r ${skill.color} text-white font-medium shadow-lg hover:shadow-xl transition-all cursor-default flex items-center gap-2`}
+                  >
+                    <span>{skill.icon}</span>
+                    <span>{skill.name}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -749,11 +805,11 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl font-bold mb-6 text-white">Discutons de votre projet</h2>
+            <h2 className="text-4xl font-bold mb-6 text-white">{t.contact.title}</h2>
             <p className="text-lg text-gray-300 mb-12">
-              Je suis actuellement à la recherche d'une alternance.
+              {t.contact.subtitle}
               <br />
-              N'hésitez pas à me contacter !
+              {t.contact.cta}
             </p>
 
             <div className="flex flex-col items-center gap-4">
@@ -786,13 +842,13 @@ export default function Home() {
       {/* Footer */}
       <footer className="py-8 px-6 border-t border-gray-200 dark:border-gray-800">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-600 dark:text-gray-400">
-          <div>© 2026 Luc Telliez. Tous droits réservés.</div>
+          <div>© 2026 Luc Telliez. {t.footer.rights}</div>
           <div className="flex gap-6">
             <a href="tel:0661066085" className="hover:text-gray-900 dark:hover:text-gray-100 transition-colors">
               06 61 06 60 85
             </a>
             <a href="mailto:telliezluc@gmail.com" className="hover:text-gray-900 dark:hover:text-gray-100 transition-colors">
-              Contact
+              {t.contact.contactLabel}
             </a>
           </div>
         </div>
