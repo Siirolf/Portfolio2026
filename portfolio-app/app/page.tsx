@@ -38,7 +38,7 @@ export default function Home() {
     ][index],
     imageUrl: [
       "/bioechecvr.png",
-      "/todo.jpg",
+      "/logo_les_toits_du_lac.jpg",
       "/eggfortress.jpg",
       "/unreal.jpg",
       "/tourdefrance.jpg",
@@ -142,6 +142,11 @@ export default function Home() {
       { name: "Blender", icon: "🎨", color: "from-orange-500 to-blue-600" }
     ],
     other: [
+      { name: "Flutter", icon: "📱", color: "from-blue-400 to-cyan-500" },
+      { name: "Dart", icon: "🎯", color: "from-teal-500 to-cyan-600" },
+      { name: "Unity", icon: "🎮", color: "from-gray-700 to-gray-900" },
+      { name: "Unreal Engine", icon: "🎮", color: "from-purple-600 to-fuchsia-600" },
+      { name: "Blender", icon: "🎨", color: "from-orange-500 to-blue-600" },
       { name: "IA & ML", icon: "🤖", color: "from-pink-500 to-rose-600" },
       { name: "Agile", icon: "🔄", color: "from-green-500 to-teal-600" },
       { name: "Cybersécurité", icon: "🔒", color: "from-red-600 to-pink-600" },
@@ -248,14 +253,18 @@ export default function Home() {
               </a>
             </div>
             
-            <motion.button
+            <motion.a
+              href="/CV_TELLIEZ_LUC.pdf"
+              download
+              target="_blank"
+              rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="px-4 py-2 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white rounded-lg text-sm font-medium transition-all flex items-center gap-2 shadow-lg shadow-blue-500/30"
             >
               <Download className="w-4 h-4" />
               {t.nav.cv}
-            </motion.button>
+            </motion.a>
           </div>
         </div>
       </motion.nav>
@@ -269,47 +278,54 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-gradient-to-r from-blue-600/10 to-cyan-600/10 border border-blue-500/20 text-blue-600 dark:text-cyan-400 rounded-full text-sm font-medium mb-6">
-                <div className="w-2 h-2 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full animate-pulse shadow-lg shadow-blue-500/50"></div>
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/70 dark:bg-gray-800/60 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 rounded-full text-sm font-medium mb-6 backdrop-blur-sm">
+                <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
                 {t.hero.available}
               </div>
               
-              <h1 className="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+              <h1 className="text-5xl lg:text-6xl font-bold mb-5 leading-tight tracking-tight">
                 {t.hero.title}
                 <br />
-                <span className="bg-gradient-to-r from-blue-600 via-cyan-600 to-blue-700 dark:from-blue-400 dark:via-cyan-400 dark:to-blue-500 bg-clip-text text-transparent">{t.hero.subtitle}</span>
+                <motion.span
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2, duration: 0.5 }}
+                  className="text-blue-600 dark:text-cyan-400"
+                >
+                  {t.hero.subtitle}
+                </motion.span>
               </h1>
               
-              <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
+              <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 leading-relaxed max-w-xl">
                 {t.hero.description}
               </p>
               
-              <div className="flex flex-wrap gap-4 mb-8">
+              <div className="flex flex-wrap gap-3 mb-8">
                 <motion.a
                   href="#contact"
-                  whileHover={{ scale: 1.05 }}
+                  whileHover={{ scale: 1.03, y: -1 }}
                   whileTap={{ scale: 0.95 }}
-                  className="px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white rounded-lg font-medium transition-all flex items-center gap-2 shadow-lg shadow-blue-500/30"
+                  className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-medium transition-all flex items-center gap-2 shadow-lg shadow-blue-500/20"
                 >
                   {t.hero.cta}
                   <ArrowUpRight className="w-4 h-4" />
                 </motion.a>
                 <motion.a
                   href="#projets"
-                  whileHover={{ scale: 1.05 }}
+                  whileHover={{ scale: 1.03, y: -1 }}
                   whileTap={{ scale: 0.95 }}
-                  className="px-6 py-3 border border-gray-300 dark:border-gray-700 hover:border-blue-500 dark:hover:border-cyan-500 rounded-lg font-medium transition-all hover:bg-gray-50 dark:hover:bg-gray-800/50"
+                  className="px-6 py-3 border border-gray-300 dark:border-gray-700 rounded-xl font-medium transition-all hover:bg-white dark:hover:bg-gray-800/60"
                 >
                   {t.hero.projects}
                 </motion.a>
               </div>
 
-              <div className="flex items-center gap-6 text-sm text-gray-600 dark:text-gray-400">
-                <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-center gap-3 text-sm text-gray-600 dark:text-gray-300">
+                <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/70 dark:bg-gray-800/60 border border-gray-200 dark:border-gray-700">
                   <MapPin className="w-4 h-4" />
                   Lille, France
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/70 dark:bg-gray-800/60 border border-gray-200 dark:border-gray-700">
                   <Clock className="w-4 h-4" />
                   CET (UTC+1)
                 </div>
@@ -322,13 +338,13 @@ export default function Home() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="relative"
             >
-              <div className="relative aspect-square bg-gradient-to-br from-slate-800 via-gray-900 to-slate-900 rounded-2xl overflow-hidden border border-gray-700 shadow-2xl">
+              <div className="relative aspect-square bg-gradient-to-br from-slate-900 to-slate-700 rounded-3xl overflow-hidden border border-gray-700 shadow-2xl">
                 <img 
                   src="/profile.jpeg" 
                   alt="Luc Telliez"
                   className="absolute inset-0 w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-blue-600/20 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent"></div>
               </div>
             </motion.div>
           </div>
@@ -583,216 +599,44 @@ export default function Home() {
             </p>
           </motion.div>
 
-          <div className="space-y-10">
-            {/* Frontend */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-600 to-cyan-600 flex items-center justify-center text-xl">
-                  🎨
+          <div className="grid gap-6 md:grid-cols-2">
+            {[
+              { key: "frontend", title: t.skills.frontend, accent: "from-sky-500/20 to-cyan-500/10 border-sky-500/30", dot: "bg-sky-500", items: skills.frontend },
+              { key: "backend", title: t.skills.backend, accent: "from-emerald-500/20 to-green-500/10 border-emerald-500/30", dot: "bg-emerald-500", items: skills.backend },
+              { key: "database", title: t.skills.database, accent: "from-amber-500/20 to-orange-500/10 border-amber-500/30", dot: "bg-amber-500", items: skills.database },
+              { key: "devops", title: t.skills.devops, accent: "from-violet-500/20 to-indigo-500/10 border-violet-500/30", dot: "bg-violet-500", items: skills.devops },
+              { key: "other", title: t.skills.other, accent: "from-rose-500/20 to-pink-500/10 border-rose-500/30", dot: "bg-rose-500", items: skills.other },
+            ].map((category) => (
+              <motion.div
+                key={category.key}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -2 }}
+                className={`rounded-2xl border bg-gradient-to-br from-white to-gray-50/60 p-6 shadow-sm dark:from-gray-900 dark:to-gray-900 ${category.accent} ${category.key === "other" ? "md:col-span-2" : ""}`}
+              >
+                <div className="flex items-center gap-2 mb-4">
+                  <span className={`w-2 h-2 rounded-full ${category.dot}`}></span>
+                  <h3 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-gray-100">{category.title}</h3>
                 </div>
-                <h3 className="text-2xl font-bold">{t.skills.frontend}</h3>
-              </div>
-              <div className="flex flex-wrap gap-3">
-                {skills.frontend.map((skill, index) => (
-                  <motion.div
-                    key={skill.name}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.03 }}
-                    whileHover={{ scale: 1.1, y: -2 }}
-                    className={`px-4 py-2 rounded-full bg-gradient-to-r ${skill.color} text-white font-medium shadow-lg hover:shadow-xl transition-all cursor-default flex items-center gap-2`}
-                  >
-                    <span>{skill.icon}</span>
-                    <span>{skill.name}</span>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Backend */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-green-600 to-emerald-600 flex items-center justify-center text-xl">
-                  ⚙️
+                <div className="flex flex-wrap gap-2.5">
+                  {category.items.map((skill, index) => (
+                    <motion.div
+                      key={skill.name}
+                      initial={{ opacity: 0, y: 4 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.02 }}
+                      whileHover={{ scale: 1.02 }}
+                      className="cursor-default rounded-lg border border-gray-200/80 bg-white/90 px-3 py-1.5 text-sm font-medium text-gray-700 dark:border-gray-700 dark:bg-gray-800/80 dark:text-gray-200"
+                    >
+                      <span className="opacity-75 mr-1">{skill.icon}</span>
+                      <span>{skill.name}</span>
+                    </motion.div>
+                  ))}
                 </div>
-                <h3 className="text-2xl font-bold">{t.skills.backend}</h3>
-              </div>
-              <div className="flex flex-wrap gap-3">
-                {skills.backend.map((skill, index) => (
-                  <motion.div
-                    key={skill.name}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.03 }}
-                    whileHover={{ scale: 1.1, y: -2 }}
-                    className={`px-4 py-2 rounded-full bg-gradient-to-r ${skill.color} text-white font-medium shadow-lg hover:shadow-xl transition-all cursor-default flex items-center gap-2`}
-                  >
-                    <span>{skill.icon}</span>
-                    <span>{skill.name}</span>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Database */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-orange-600 to-red-600 flex items-center justify-center text-xl">
-                  🗄️
-                </div>
-                <h3 className="text-2xl font-bold">{t.skills.database}</h3>
-              </div>
-              <div className="flex flex-wrap gap-3">
-                {skills.database.map((skill, index) => (
-                  <motion.div
-                    key={skill.name}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.03 }}
-                    whileHover={{ scale: 1.1, y: -2 }}
-                    className={`px-4 py-2 rounded-full bg-gradient-to-r ${skill.color} text-white font-medium shadow-lg hover:shadow-xl transition-all cursor-default flex items-center gap-2`}
-                  >
-                    <span>{skill.icon}</span>
-                    <span>{skill.name}</span>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* DevOps */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-600 to-indigo-600 flex items-center justify-center text-xl">
-                  🚀
-                </div>
-                <h3 className="text-2xl font-bold">{t.skills.devops}</h3>
-              </div>
-              <div className="flex flex-wrap gap-3">
-                {skills.devops.map((skill, index) => (
-                  <motion.div
-                    key={skill.name}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.03 }}
-                    whileHover={{ scale: 1.1, y: -2 }}
-                    className={`px-4 py-2 rounded-full bg-gradient-to-r ${skill.color} text-white font-medium shadow-lg hover:shadow-xl transition-all cursor-default flex items-center gap-2`}
-                  >
-                    <span>{skill.icon}</span>
-                    <span>{skill.name}</span>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Mobile */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-600 to-blue-600 flex items-center justify-center text-xl">
-                  📱
-                </div>
-                <h3 className="text-2xl font-bold">{t.skills.mobile}</h3>
-              </div>
-              <div className="flex flex-wrap gap-3">
-                {skills.mobile.map((skill, index) => (
-                  <motion.div
-                    key={skill.name}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.03 }}
-                    whileHover={{ scale: 1.1, y: -2 }}
-                    className={`px-4 py-2 rounded-full bg-gradient-to-r ${skill.color} text-white font-medium shadow-lg hover:shadow-xl transition-all cursor-default flex items-center gap-2`}
-                  >
-                    <span>{skill.icon}</span>
-                    <span>{skill.name}</span>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Game Development */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-fuchsia-600 to-purple-600 flex items-center justify-center text-xl">
-                  🎮
-                </div>
-                <h3 className="text-2xl font-bold">{t.skills.gamedev}</h3>
-              </div>
-              <div className="flex flex-wrap gap-3">
-                {skills.gamedev.map((skill, index) => (
-                  <motion.div
-                    key={skill.name}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.03 }}
-                    whileHover={{ scale: 1.1, y: -2 }}
-                    className={`px-4 py-2 rounded-full bg-gradient-to-r ${skill.color} text-white font-medium shadow-lg hover:shadow-xl transition-all cursor-default flex items-center gap-2`}
-                  >
-                    <span>{skill.icon}</span>
-                    <span>{skill.name}</span>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Other */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-pink-600 to-rose-600 flex items-center justify-center text-xl">
-                  ⭐
-                </div>
-                <h3 className="text-2xl font-bold">{t.skills.other}</h3>
-              </div>
-              <div className="flex flex-wrap gap-3">
-                {skills.other.map((skill, index) => (
-                  <motion.div
-                    key={skill.name}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.03 }}
-                    whileHover={{ scale: 1.1, y: -2 }}
-                    className={`px-4 py-2 rounded-full bg-gradient-to-r ${skill.color} text-white font-medium shadow-lg hover:shadow-xl transition-all cursor-default flex items-center gap-2`}
-                  >
-                    <span>{skill.icon}</span>
-                    <span>{skill.name}</span>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>

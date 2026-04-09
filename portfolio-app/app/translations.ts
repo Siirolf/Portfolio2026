@@ -12,7 +12,7 @@ export const translations = {
       available: "Disponible pour n'importe quel projet",
       title: "Développeur",
       subtitle: "Full-Stack",
-      description: "Étudiant en 3ème année de BUT Informatique et apprenti développeur COBOL, actuellement candidat dans des écoles d'ingénieurs. Curieux et passionné, j'aime explorer différents langages, technologies et domaines de la programmation : du web moderne aux systèmes mainframe, en passant par le développement mobile et les jeux vidéo.",
+      description: "Étudiant ingénieur à l’INSA et alternant chez IBM, je mets mes compétences au service de projets concrets. Curieux et impliqué, je suis à l’écoute d’opportunités pour accompagner entrepreneurs et entreprises dans la réalisation de leurs solutions numériques.",
       cta: "Me contacter",
       projects: "Voir mes projets",
       location: "Lille, France",
