@@ -27,8 +27,8 @@ export const translations = {
     experiences: {
       prof: [
         {
-          year: "Août 2025 - Aujourd'hui",
-          title: "Développeur/Testeur COBOL",
+          year: "Août 2024 - Aujourd'hui",
+          title: "Analyste développeur COBOL",
           company: "IBM CIC - Lille",
           type: "Apprentissage",
           description: "Développement d'applications bancaires COBOL : ajout de fonctionnalités, conception d'applications complètes et analyse de programmes. Collaboration inter-équipes (développeurs COBOL/C#/DevBooster, analystes, chefs de projet). Tests et assurance qualité selon les normes clients. Formation au développement sur DevBooster (framework .NET propriétaire) depuis janvier 2026.",
@@ -68,6 +68,13 @@ export const translations = {
         }
       ],
       personal: [
+        {
+          year: "2026 - 2029",
+          title: "Diplôme d'Ingénieur Informatique et Cybersécurité",
+          company: "INSA Hauts-de-France - Valenciennes",
+          description: "Formation d'ingénieur en informatique avec spécialisation en cybersécurité à l'Institut National des Sciences Appliquées Hauts-de-France.",
+          tags: ["Cybersécurité", "Informatique", "Ingénierie"]
+        },
         {
           year: "2023-2026",
           title: "BUT Informatique",
@@ -226,8 +233,8 @@ export const translations = {
     experiences: {
       prof: [
         {
-          year: "August 2025 - Present",
-          title: "COBOL Developer/Tester",
+          year: "August 2024 - Present",
+          title: "COBOL Analyst Developer",
           company: "IBM CIC - Lille",
           type: "Work-study",
           description: "Development of COBOL banking applications: adding features, designing complete applications and program analysis. Cross-team collaboration (COBOL/C#/DevBooster developers, analysts, project managers). Testing and quality assurance according to client standards. Training in DevBooster development (proprietary .NET framework) since January 2026.",
@@ -267,6 +274,13 @@ export const translations = {
         }
       ],
       personal: [
+        {
+          year: "2026 - 2029",
+          title: "Engineering Degree in Computer Science and Cybersecurity",
+          company: "INSA Hauts-de-France - Valenciennes",
+          description: "Engineering program in computer science with a specialization in cybersecurity at the Institut National des Sciences Appliquées Hauts-de-France.",
+          tags: ["Cybersecurity", "Computer Science", "Engineering"]
+        },
         {
           year: "2023-2026",
           title: "Computer Science Bachelor's Degree",
